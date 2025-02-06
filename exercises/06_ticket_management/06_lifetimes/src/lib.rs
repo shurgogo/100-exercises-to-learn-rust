@@ -36,6 +36,16 @@ impl TicketStore {
     }
 }
 
+// 保留 TicketStore 的所有权，只传递不可变引用
+impl<'a> IntoIterator for &'a TicketStore {
+    type Item = &'a Ticket;
+    type IntoIter = std::slice::Iter<'a, Ticket>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.tickets.iter() // ✅ 这样不会获取所有权，而是返回 `Iter<'a, Ticket>`
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

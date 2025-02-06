@@ -27,6 +27,16 @@ pub enum Status {
     Done,
 }
 
+// 会拿走 TicketStore 的所有权，返回一个 Iterator
+// 后续 TicketStore 不可用
+impl IntoIterator for TicketStore {
+    type Item = Ticket;
+    type IntoIter = std::vec::IntoIter<Self::Item>;
+    fn into_iter(self) -> Self::IntoIter {
+        self.tickets.into_iter()
+    }
+}
+
 impl TicketStore {
     pub fn new() -> Self {
         Self {
