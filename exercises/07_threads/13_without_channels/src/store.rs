@@ -8,8 +8,8 @@ pub struct TicketId(u64);
 
 #[derive(Clone)]
 pub struct TicketStore {
-    tickets: BTreeMap<TicketId, Arc<RwLock<Ticket>>>,
-    counter: u64,
+    pub tickets: BTreeMap<TicketId, Arc<RwLock<Ticket>>>,
+    pub counter: u64,
 }
 
 impl TicketStore {
